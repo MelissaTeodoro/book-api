@@ -1,4 +1,4 @@
-package com.read.book.api.repositories;
+package com.read.book.api.repository;
 
 import com.read.book.api.domain.Book;
 import org.springframework.data.jpa.repository.JpaRepository;

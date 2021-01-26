@@ -2,8 +2,8 @@ package com.read.book.api.service;
 
 import com.read.book.api.domain.Book;
 import com.read.book.api.domain.Category;
-import com.read.book.api.repositories.BookRepository;
-import com.read.book.api.repositories.CategoryRepository;
+import com.read.book.api.repository.BookRepository;
+import com.read.book.api.repository.CategoryRepository;
 import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
