@@ -1,5 +1,6 @@
 package com.read.book.api.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -19,6 +20,7 @@ public class Book implements Serializable {
   private String authorName;
   private String text;
 
+  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "category_id")
   private Category category;
