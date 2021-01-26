@@ -19,10 +19,18 @@ public class DBService {
 
   public void instantiateDataBase() {
     Category cat1 = new Category(null, "Computing", "TI Books");
-    Book book1 = new Book(null, "Clean Architecture", "Robert Martin", "-", cat1);
+    Category cat2 = new Category(null, "Science Fiction", "Science Fiction Books");
+    Category cat3 = new Category(null, "Self Help", "Self Help Books");
+    Category cat4 = new Category(null, "Adventure", "Adventure Books");
 
-    cat1.getBooks().addAll(Arrays.asList(book1));
-    this.categoryRepository.saveAll(Arrays.asList(cat1));
-    this.bookRepository.saveAll(Arrays.asList(book1));
+    Book book1 = new Book(null, "Clean Architecture", "Robert Martin", "-", cat1);
+    Book book2 = new Book(null, "Clean Code", "Robert Martin", "-", cat1);
+    Book book3 = new Book(null, "Harry Potter", "J. K. Rowling", "-", cat4);
+
+    cat1.getBooks().addAll(Arrays.asList(book1, book2));
+    cat4.getBooks().addAll(Arrays.asList(book3));
+
+    this.categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4));
+    this.bookRepository.saveAll(Arrays.asList(book1, book2, book3));
   }
 }
