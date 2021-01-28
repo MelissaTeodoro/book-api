@@ -3,6 +3,7 @@ package com.read.book.api.service;
 import com.read.book.api.domain.Category;
 import com.read.book.api.repository.CategoryRepository;
 import com.read.book.exception.NotFoundException;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,4 +22,7 @@ public class CategoryService {
     );
   }
 
+  public List<Category> findAll() {
+    return categoryRepository.findAll();
+  }
 }
