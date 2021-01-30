@@ -7,6 +7,7 @@ import com.read.book.api.repository.CategoryRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -42,6 +43,13 @@ public class CategoryService {
 
   public void delete(Integer id) {
     findById(id);
-    categoryRepository.deleteById(id);
+
+    try {
+      categoryRepository.deleteById(id);
+    } catch (DataIntegrityViolationException e) {
+      throw new com.read.book.api.exception.DataIntegrityViolationException(
+          "Category cannot be deleted because it has associated books"
+      );
+    }
   }
 }

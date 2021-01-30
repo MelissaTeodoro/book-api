@@ -1,8 +1,10 @@
 package com.read.book.api.exception;
 
+import java.time.LocalDateTime;
+
 public class ErrorReturn {
 
-  private Long timeStamp;
+  private LocalDateTime timeStamp;
   private Integer status;
   private String error;
 
@@ -10,17 +12,17 @@ public class ErrorReturn {
     super();
   }
 
-  public ErrorReturn(Long timeStamp, Integer status, String error) {
+  public ErrorReturn(LocalDateTime timeStamp, Integer status, String error) {
     this.timeStamp = timeStamp;
     this.status = status;
     this.error = error;
   }
 
-  public Long getTimeStamp() {
+  public LocalDateTime getTimeStamp() {
     return timeStamp;
   }
 
-  public void setTimeStamp(Long timeStamp) {
+  public void setTimeStamp(LocalDateTime timeStamp) {
     this.timeStamp = timeStamp;
   }
 
