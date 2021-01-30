@@ -1,7 +1,7 @@
-package com.read.book.api;
+package com.read.book.api.config;
 
-import com.read.book.exception.ErrorReturn;
-import com.read.book.exception.NotFoundException;
+import com.read.book.api.exception.ErrorReturn;
+import com.read.book.api.exception.NotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.read.book.exception;
+package com.read.book.api.exception;
 
 public class ErrorReturn {
 
