@@ -17,6 +17,7 @@ public class CategoryService {
 
   public Category findById(Integer id) {
     Optional<Category> categoryOptional = categoryRepository.findById(id);
+
     return categoryOptional.orElseThrow(() -> new NotFoundException(
             String.format("Category not found for id:%s and type:%s", id, Category.class.getName())
         )
@@ -29,21 +30,13 @@ public class CategoryService {
 
   public Category create(Category category) {
     category.setId(null);
+
     return categoryRepository.save(category);
   }
 
   public Category update(Integer id, CategoryDTO categoryDTO) {
-    Optional<Category> category = categoryRepository.findById(id);
+    final Category category = findById(id);
 
-    if (category.isPresent()) {
-      category.get().setName(categoryDTO.getName());
-      category.get().setDescription(categoryDTO.getDescription());
-
-      return categoryRepository.save(category.get());
-    } else {
-      throw new NotFoundException(
-          String.format("Category update not found for id:%s and type:%s", id,
-              Category.class.getName()));
-    }
+    return categoryRepository.save(category);
   }
 }
