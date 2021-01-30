@@ -1,6 +1,7 @@
 package com.read.book.api.service;
 
 import com.read.book.api.domain.Category;
+import com.read.book.api.dto.CategoryDTO;
 import com.read.book.api.repository.CategoryRepository;
 import com.read.book.exception.NotFoundException;
 import java.util.List;
@@ -24,5 +25,25 @@ public class CategoryService {
 
   public List<Category> findAll() {
     return categoryRepository.findAll();
+  }
+
+  public Category create(Category category) {
+    category.setId(null);
+    return categoryRepository.save(category);
+  }
+
+  public Category update(Integer id, CategoryDTO categoryDTO) {
+    Optional<Category> category = categoryRepository.findById(id);
+
+    if (category.isPresent()) {
+      category.get().setName(categoryDTO.getName());
+      category.get().setDescription(categoryDTO.getDescription());
+
+      return categoryRepository.save(category.get());
+    } else {
+      throw new NotFoundException(
+          String.format("Category update not found for id:%s and type:%s", id,
+              Category.class.getName()));
+    }
   }
 }

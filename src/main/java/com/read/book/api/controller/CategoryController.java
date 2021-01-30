@@ -3,14 +3,19 @@ package com.read.book.api.controller;
 import com.read.book.api.domain.Category;
 import com.read.book.api.dto.CategoryDTO;
 import com.read.book.api.service.CategoryService;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping(value = "/categories")
@@ -33,6 +38,21 @@ public class CategoryController {
         .collect(Collectors.toList());
 
     return ResponseEntity.ok().body(categoryDTOS);
+  }
+
+  @PostMapping
+  public ResponseEntity<Category> create(@RequestBody Category category) {
+    category = categoryService.create(category);
+    URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
+        .buildAndExpand(category.getId()).toUri();
+
+    return ResponseEntity.created(uri).body(category);
+  }
+
+  @PutMapping(value = "/{id}")
+  public ResponseEntity<CategoryDTO> update(@PathVariable Integer id, @RequestBody CategoryDTO categoryDTO) {
+    Category newCategory = categoryService.update(id, categoryDTO);
+    return ResponseEntity.ok().body(new CategoryDTO(newCategory));
   }
 
 }
