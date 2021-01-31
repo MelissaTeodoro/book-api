@@ -1,6 +1,7 @@
 package com.read.book.api.service;
 
 import com.read.book.api.domain.Book;
+import com.read.book.api.domain.Category;
 import com.read.book.api.exception.NotFoundException;
 import com.read.book.api.repository.BookRepository;
 import java.util.List;
@@ -13,6 +14,9 @@ public class BookService {
 
   @Autowired
   private BookRepository bookRepository;
+
+  @Autowired
+  private CategoryService categoryService;
 
   public Book findById(Integer id) {
     final Optional<Book> bookOptional = bookRepository.findById(id);
@@ -40,5 +44,13 @@ public class BookService {
     newBook.setTitle(book.getTitle());
     newBook.setAuthorName(book.getAuthorName());
     newBook.setText(book.getText());
+  }
+
+  public Book create(Integer idCategory, Book book) {
+    book.setId(null);
+    final Category category = categoryService.findById(idCategory);
+    book.setCategory(category);
+
+    return bookRepository.save(book);
   }
 }
