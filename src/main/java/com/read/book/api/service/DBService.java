@@ -26,11 +26,12 @@ public class DBService {
     Book book1 = new Book(null, "Clean Architecture", "Robert Martin", "-", cat1);
     Book book2 = new Book(null, "Clean Code", "Robert Martin", "-", cat1);
     Book book3 = new Book(null, "Harry Potter", "J. K. Rowling", "-", cat4);
+    Book book4 = new Book(null, "Narnia", "C. S. Lewis", "-", cat4);
 
     cat1.getBooks().addAll(Arrays.asList(book1, book2));
-    cat4.getBooks().addAll(Arrays.asList(book3));
+    cat4.getBooks().addAll(Arrays.asList(book3, book4));
 
     this.categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4));
-    this.bookRepository.saveAll(Arrays.asList(book1, book2, book3));
+    this.bookRepository.saveAll(Arrays.asList(book1, book2, book3, book4));
   }
 }

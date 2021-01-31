@@ -36,7 +36,8 @@ public class CategoryController {
   public ResponseEntity<List<CategoryDTO>> findAll() {
     final List<Category> categories = categoryService.findAll();
     final List<CategoryDTO> categoryDTOS = categories
-        .stream().map(CategoryDTO::new)
+        .stream()
+        .map(CategoryDTO::new)
         .collect(Collectors.toList());
 
     return ResponseEntity.ok().body(categoryDTOS);
