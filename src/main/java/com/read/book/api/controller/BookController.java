@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,6 +66,12 @@ public class BookController {
     final URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/books/{id}").buildAndExpand(book.getId()).toUri();
 
     return ResponseEntity.created(uri).body(newBook);
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Book> delete(@PathVariable Integer id) {
+    bookService.delete(id);
+    return ResponseEntity.noContent().build();
   }
 
 }
