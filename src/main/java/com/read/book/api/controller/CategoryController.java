@@ -6,6 +6,7 @@ import com.read.book.api.service.CategoryService;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -44,7 +45,7 @@ public class CategoryController {
   }
 
   @PostMapping
-  public ResponseEntity<Category> create(@RequestBody Category category) {
+  public ResponseEntity<Category> create(@Valid @RequestBody Category category) {
     category = categoryService.create(category);
     final URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
         .buildAndExpand(category.getId()).toUri();
@@ -53,7 +54,7 @@ public class CategoryController {
   }
 
   @PutMapping(value = "/{id}")
-  public ResponseEntity<CategoryDTO> update(@PathVariable Integer id, @RequestBody CategoryDTO categoryDTO) {
+  public ResponseEntity<CategoryDTO> update(@Valid @PathVariable Integer id, @RequestBody CategoryDTO categoryDTO) {
     final Category newCategory = categoryService.update(id, categoryDTO);
 
     return ResponseEntity.ok().body(new CategoryDTO(newCategory));
